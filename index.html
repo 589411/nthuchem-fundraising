@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清華大學化學館外牆修整與室內整治計畫募款</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">清華大學化學館外牆修整與室內整治計畫募款</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="image-container">
+                    <img id="buildingImage" src="building.jpg" alt="化學館" class="img-fluid mb-3" style="filter: grayscale(1)">
+                </div>
+                <div class="progress mb-3">
+                    <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                </div>
+                <h3 class="text-center">目標金額：NT$ 30,000,000</h3>
+                <h4 class="text-center" id="currentAmount">當前募得金額：NT$ 0</h4>
+                
+                <!-- 團體捐款統計圖表 -->
+                <div class="mt-4">
+                    <h4 class="text-center mb-3">團體捐款統計</h4>
+                    <canvas id="groupDonationChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">我要捐款</h5>
+                        <form id="donationForm">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">電子郵件</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">已捐款之台幣金額</label>
+                                <input type="number" class="form-control" id="amount" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="groupName" class="form-label">希望公開致謝的名義</label>
+                                <select class="form-select" id="groupName" required>
+                                    <option value="">請選擇</option>
+                                    <option value="個人姓名出列">個人姓名出列</option>
+                                    <option value="愛校人士">愛校人士(不具名)</option>
+                                    <option value="財團法人水木化學文教基金會">財團法人水木化學文教基金會</option>
+                                    <option value="化學75B">化學75B</option>
+                                    <option value="化學85B">化學85B</option>
+                                    <option value="化學95B">化學95B</option>
+                                    <option value="化學96B">化學96B</option>
+                                    <option value="化學98B">化學98B</option>
+                                    <option value="化學00B">化學00B</option>
+                                    <option value="化學01B">化學01B</option>
+                                    <option value="韓建中教授實驗室">韓建中教授實驗室</option>
+                                    <option value="劉瑞雄教授實驗室">劉瑞雄教授實驗室</option>
+                                    <option value="汪炳鈞教授實驗室">汪炳鈞教授實驗室</option>
+                                    <option value="鄭建鴻教授實驗室">鄭建鴻教授實驗室</option>
+                                    <option value="成大教職員系友">成大教職員系友</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="mb-3" id="otherGroupDiv" style="display: none;">
+                                <label for="otherGroup" class="form-label">請輸入團體名稱</label>
+                                <input type="text" class="form-control" id="otherGroup" placeholder="例：○○級系友、○○教授實驗室">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">確認捐款</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="recentDonations" class="mt-3">
+                    <h5>最近捐款紀錄</h5>
+                    <ul class="list-group" id="donationsList">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="celebrationModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🎉 感謝您的支持！</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="celebrationMessage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const img = document.getElementById('buildingImage');
+            img.onerror = function() {
+                console.error('圖片載入失敗');
+                this.src = 'https://via.placeholder.com/800x600?text=清華大學化學館';
+            };
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
